@@ -3,7 +3,7 @@ from openai import OpenAI
 
 client = OpenAI(
             # defaults to os.environ.get("OPENAI_API_KEY")
-            api_key="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",
+            api_key="API KEY",
         )
 
 def message_reply(message):
