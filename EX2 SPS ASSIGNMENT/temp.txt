@@ -1,0 +1,66 @@
+import smtplib,hashlib
+import time,random
+import GPT_API
+
+class User:
+    def __init__ (email,password):
+        global SENDER_EMAIL,SERVER,email_hash,pass_hash
+        SENDER_EMAIL = "tempforproject2@gmail.com"
+        SERVER = smtplib.SMTP("smtp.gmail.com",587)
+        pass_hash = hashlib.new("sha256")
+        email_hash = hashlib.new("sha256")
+
+        self.email = str(email)
+        self.user_messages = {}
+        pass_hash.update((password).encode())
+
+
+    def send_message(self,message):
+        self.user_messages.append(message)
+        time.sleep(random.randint(0,8))
+        self.user_messages.add({self.name:message})
+        self.user_messages.add({"Bob":self.message_reply(message)})
+        return True
+
+    def message_reply(self,message):
+        return GPT_API.message_reply(str(message))
+
+    def verify(self):
+        emails = open("emails.txt", "r")
+        passwords = open("passwords.txt", "r")
+
+        email_hash.update((self.email).encode())
+        if (email_hash.hexdigest() in emails.readlines()) and (pass_hash.hexdigest() in passwords.readlines()):
+            return True
+        else:
+            emails.close()
+            return False
+
+    def new_account(self):
+
+        OTP = "".join([str(random.randint(1,9)) for i in range(5)])
+        SERVER.starttls()
+        SERVER.login(SENDER_EMAIL, "mkbjvnpaqckszzso")
+
+        try:
+            SERVER.sendmail(SENDER_EMAIL, self.email, f"Your unique OTP (One Time Password) is {OTP}")
+        except:
+            return False #retry here
+        
+
+        for i in range(3):
+            if self.get_OTP == OTP:
+                emails = open("emails.txt","a")
+                emails.write(hash.hexdigest())
+                emails.close()
+
+                passwords = open("passwords.txt","a")
+                passwords.write(pass_hash.hexdigest())
+                passwords.close()
+
+                return True
+            
+        return False
+
+    def get_OTP(self,OTP):
+        return OTP
