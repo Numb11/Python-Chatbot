@@ -5,7 +5,7 @@ messages=[ #creation of list containing dictionary stored in variable messages
         ]
 
 client = OpenAI( #Creation of OpenAI client
-            api_key = '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', #initalize api key to access GPT API
+            api_key = '', #initalize api key to access GPT API
         )
 
 def message_reply(message):
